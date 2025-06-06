@@ -39,6 +39,11 @@ with st.sidebar:
     selected_model = st.radio("Vision Model", ["OpenAI", "Groq"])
     openai_key = st.text_input("OpenAI API Key", type="password")
     groq_key = st.text_input("Groq API Key", type="password")
+    language = st.selectbox(
+        "Alt-Text Language",
+        ["English", "Dutch", "Spanish", "French", "German"],
+        index=0,
+    )
     alt_lines = st.number_input(
         " Number of Alt-Text Lines",
         min_value=1,
@@ -86,7 +91,8 @@ if uploaded_file:
                     openai_key,
                     groq_key,
                     is_logo=is_logo,
-                    alt_line_count=alt_lines
+                    alt_line_count=alt_lines,
+                    language=language,
                 )
 
                 label = label_output(page_num, idx + 1, alt_text)
