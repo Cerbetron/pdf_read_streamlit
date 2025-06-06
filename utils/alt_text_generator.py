@@ -47,7 +47,8 @@ def generate_alt_text(
     openai_key: str,
     groq_key: str,
     is_logo: bool = False,
-    alt_line_count: int = 2
+    alt_line_count: int = 2,
+    language: str = "English"
 ) -> str:
     """
     Generate alt-text using the selected vision model.
@@ -59,6 +60,7 @@ def generate_alt_text(
         groq_key: Groq API key
         is_logo: Whether the image is a company logo
         alt_line_count: Max number of lines for alt-text
+        language: Desired language for the alt-text
 
     Returns:
         Alt-text string
@@ -66,7 +68,10 @@ def generate_alt_text(
     if is_logo:
         return "Company logo."
 
-    prompt = f"Generate a brief alt-text for this image within {alt_line_count} line(s), suitable for screen readers."
+    prompt = (
+        f"Generate a brief alt-text in {language} for this image within "
+        f"{alt_line_count} line(s), suitable for screen readers."
+    )
     b64_image = encode_image_to_base64(image)
 
     try:
